@@ -13,6 +13,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "ant-design-vue": "^2.2.8",
     "core-js": "^3.6.5",
     "net": "^1.0.2",
     "node-pop3": "^0.7.0",

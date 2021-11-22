@@ -1,14 +1,22 @@
 <template>
   <div>
-    user name:
-    <input type="text" v-model="userName" />
-    pop server:
-    <input type="text" v-model="popServer" />
-    password:
-    <input type="text" v-model="password" />
-    port:
-    <input type="text" v-model="port" />
-    <button v-on:click="connectButton()">connect</button>
+    <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
+      <a-form-item label="user name">
+        <a-input type="text" v-model="userName" />
+      </a-form-item>
+      <a-form-item label="pop server">
+        <a-input type="text" v-model="popServer" />
+      </a-form-item>
+      <a-form-item label="pop port">
+        <a-input type="text" v-model="port" />
+      </a-form-item>
+      <a-form-item label="password">
+        <a-input-password type="text" v-model="password" />
+      </a-form-item>
+      <a-button type="primary" v-on:click="connectButton()">
+        connect
+      </a-button>
+    </a-form>
   </div>
 </template>
 
