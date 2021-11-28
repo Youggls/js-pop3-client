@@ -17,6 +17,7 @@
     "core-js": "^3.6.5",
     "net": "^1.0.2",
     "node-pop3": "^0.7.0",
+    "tls": "^0.0.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -28,7 +29,7 @@
     "electron": "^13.0.0",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
+    "eslint-plugin-vue": "^8.1.1",
     "vue-cli-plugin-electron-builder": "~2.1.1"
   },
   "eslintConfig": {
