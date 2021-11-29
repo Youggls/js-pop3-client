@@ -3,5 +3,8 @@ module.exports = {
     electronBuilder: {
       nodeIntegration: true
     }
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 }
