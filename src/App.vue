@@ -83,7 +83,7 @@
 
 <script>
 import Pop3 from "./pop3/pop3.js";
-import { message } from 'ant-design-vue';
+import { message } from "ant-design-vue";
 import {
   MailOutlined,
   LockOutlined,
@@ -114,26 +114,30 @@ export default {
   mounted() {},
   methods: {
     showErr(errMsg) {
-      message.error(errMsg)
+      message.error(errMsg);
     },
     connectButton() {
       (async () => {
-        let pop3 = new Pop3(
-          this.popServer,
-          parseInt(this.port),
-          this.userName,
-          this.password,
-          this.checked
-        );
-        await pop3._initSocket();
-        const [userResult] = await pop3.command("USER", this.userName);
-        const [passResult] = await pop3.command("PASS", this.password);
-        this.commandInfoList.push(">>> USER");
-        this.commandInfoList.push("<<< " + userResult + "");
-        this.commandInfoList.push(">>> PASS");
-        this.commandInfoList.push(">>> " + passResult + "");
-        this.pop3 = pop3;
-        message.success('Connected!')
+        try {
+          let pop3 = new Pop3(
+            this.popServer,
+            parseInt(this.port),
+            this.userName,
+            this.password,
+            this.checked
+          );
+          await pop3._initSocket();
+          const [userResult] = await pop3.command("USER", this.userName);
+          const [passResult] = await pop3.command("PASS", this.password);
+          this.commandInfoList.push(">>> USER");
+          this.commandInfoList.push("<<< " + userResult + "");
+          this.commandInfoList.push(">>> PASS");
+          this.commandInfoList.push(">>> " + passResult + "");
+          this.pop3 = pop3;
+          message.success("Connected!");
+        } catch {
+          message.error("Connection error! Please check your input or connection!");
+        }
       })();
     },
     listButton() {
@@ -150,12 +154,12 @@ export default {
           await pop3.command("USER", this.userName);
           await pop3.command("PASS", this.password);
           let listRes = await pop3.LIST();
-          if (listRes instanceof Array) listRes = listRes[listRes.length - 1]
+          if (listRes instanceof Array) listRes = listRes[listRes.length - 1];
           this.commandInfoList.push(">>> LIST");
           this.commandInfoList.push("<<< " + listRes);
         })();
       } else {
-        this.showErr('Please connect first!')
+        this.showErr("Please connect first!");
       }
     },
     retrButton() {
@@ -177,7 +181,7 @@ export default {
           this.mailInfo = await this.stream2String(stream);
         })();
       } else {
-        this.showErr('Please connect first!')
+        this.showErr("Please connect first!");
       }
     },
     statButton() {
@@ -193,12 +197,12 @@ export default {
           await pop3._initSocket();
           await pop3.command("USER", this.userName);
           await pop3.command("PASS", this.password);
-          const [statInfo] = await pop3.command('STAT');
+          const [statInfo] = await pop3.command("STAT");
           this.commandInfoList.push(">>> STAT");
           this.commandInfoList.push("<<< " + statInfo);
         })();
       } else {
-        this.showErr('Please connect first!')
+        this.showErr("Please connect first!");
       }
     },
     quitButton() {
@@ -214,19 +218,19 @@ export default {
           await pop3._initSocket();
           await pop3.command("USER", this.userName);
           await pop3.command("PASS", this.password);
-          const [quitInfo] = await pop3.command('QUIT');
+          const [quitInfo] = await pop3.command("QUIT");
           this.commandInfoList.push(">>> QUIT");
           this.commandInfoList.push("<<< " + quitInfo);
-          this.pop3 = null
-          message.success('Quit successfully')
+          this.pop3 = null;
+          message.success("Quit successfully");
         })();
       } else {
-        this.showErr('Not connected!')
+        this.showErr("Not connected!");
       }
     },
     clearButton() {
-      this.mailInfo = ''
-      this.commandInfoList = []
+      this.mailInfo = "";
+      this.commandInfoList = [];
     },
     stream2String(stream) {
       return new Promise((resolve, reject) => {
